@@ -10,6 +10,9 @@
     "require": "./dist/index.cjs",
     "default": "./dist/index.cjs"
   },
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "scripts": {
     "build": "node ./scripts/build.mjs && tsc"
