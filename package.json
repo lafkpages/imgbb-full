@@ -24,7 +24,7 @@
     "hosting"
   ],
   "author": "LuisAFK",
-  "license": "ISC",
+  "license": "AGPL-3.0",
   "devDependencies": {
     "@gjsify/esbuild-plugin-transform-ext": "^0.0.3",
     "@replit-svelte/types": "^1.0.8",
