@@ -1,4 +1,4 @@
-import mime from 'mime';
+import { getType } from 'mime';
 import type { User } from '@replit-svelte/types';
 
 let IMGBB_KEY: string | undefined = undefined;
@@ -221,7 +221,7 @@ export async function uploadImage(opts: ImageUploadOptions) {
     ...opts
   };
 
-  const type = mime.getType(opts.name || '') || undefined;
+  const type = getType(opts.name || '') || undefined;
 
   const blob =
     opts.image instanceof Blob
