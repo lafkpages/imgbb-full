@@ -7,7 +7,7 @@
     "build": "node ./scripts/build.mjs && tsc"
   },
   "keywords": [],
-  "author": "",
+  "author": "LuisAFK",
   "license": "ISC",
   "devDependencies": {
     "@gjsify/esbuild-plugin-transform-ext": "^0.0.3",
