@@ -6,7 +6,12 @@
   "scripts": {
     "build": "node ./scripts/build.mjs && tsc"
   },
-  "keywords": [],
+  "keywords": [
+    "imgbb",
+    "image",
+    "upload",
+    "hosting"
+  ],
   "author": "LuisAFK",
   "license": "ISC",
   "devDependencies": {
