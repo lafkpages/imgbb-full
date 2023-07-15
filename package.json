@@ -1,0 +1,22 @@
+{
+  "name": "imgbb-full",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "node ./scripts/build.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@gjsify/esbuild-plugin-transform-ext": "^0.0.3",
+    "@replit-svelte/types": "^1.0.8",
+    "@types/mime": "^3.0.1",
+    "@types/node": "^20.4.2",
+    "esbuild": "^0.18.13"
+  },
+  "dependencies": {
+    "mime": "^3.0.0"
+  }
+}
