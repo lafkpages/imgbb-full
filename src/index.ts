@@ -1,11 +1,11 @@
-import { getType } from 'mime';
-import type { User } from '@replit-svelte/types';
+import { getType } from "mime";
+import type { User } from "@replit-svelte/types";
 
 let IMGBB_KEY: string | undefined = undefined;
 let IMGBB_COOKIE: string | undefined = undefined;
 let IMGBB_USERNAME: string | undefined = undefined;
 
-export const host = 'imgbb.com';
+export const host = "imgbb.com";
 export const website = `https://${host}`;
 export const endpoint = `/json`;
 
@@ -18,9 +18,9 @@ export interface ImageUploadOptions {
 }
 
 export enum ImageUploadExpiration {
-  OneHour = 'PT1H',
-  SixMonths = 'P6M',
-  Never = ''
+  OneHour = "PT1H",
+  SixMonths = "P6M",
+  Never = "",
 }
 
 export type ImageUploadResultCode = 200;
@@ -66,12 +66,12 @@ export interface ImageUploadResult {
     is_use_loader?: boolean;
   };
   request?: {
-    action?: 'upload' | string;
+    action?: "upload" | string;
     album_id?: number;
     auth_token?: string;
     expiration?: ImageUploadExpiration;
     timestamp?: string;
-    type?: 'file' | string;
+    type?: "file" | string;
   };
 }
 
@@ -139,7 +139,7 @@ export interface ImageUploadAlbum {
   time?: number;
   parent_id?: null | string;
   cover_id?: any;
-  privacy?: 'private_but_link' | any;
+  privacy?: "private_but_link" | any;
   privacy_notes?: string | null;
   privacy_readable?: string | null;
   password?: string | null;
@@ -167,16 +167,12 @@ export interface ApiConfig {
 }
 
 export function config(config: ApiConfig) {
-  ({
-    key: IMGBB_KEY,
-    cookie: IMGBB_COOKIE,
-    username: IMGBB_USERNAME
-  } = config);
+  ({ key: IMGBB_KEY, cookie: IMGBB_COOKIE, username: IMGBB_USERNAME } = config);
 }
 
 function ensureCreds() {
   if (!IMGBB_KEY || !IMGBB_COOKIE || !IMGBB_USERNAME) {
-    throw new Error('ImgBB credentials not configured, please use config()');
+    throw new Error("ImgBB credentials not configured, please use config()");
   }
 }
 
@@ -189,13 +185,13 @@ export async function apiRequest(opts: ApiOptions) {
   const resp = await fetch(
     opts.endpoint || `${opts.endpointUseOrigin ? origin : website}${endpoint}`,
     {
-      method: 'POST',
+      method: "POST",
       body: opts.body,
       headers: {
         cookie: opts.cookie || IMGBB_COOKIE!,
-        origin
-      }
-    }
+        origin,
+      },
+    },
   );
 
   if (!resp.ok) {
@@ -203,8 +199,8 @@ export async function apiRequest(opts: ApiOptions) {
 
     throw new Error(
       `response status ${resp.status}: ${
-        data?.error?.message || 'no error message provided'
-      }`
+        data?.error?.message || "no error message provided"
+      }`,
     );
   }
 
@@ -217,32 +213,32 @@ export async function uploadImage(opts: ImageUploadOptions) {
   opts = {
     username: IMGBB_USERNAME,
     expiration: ImageUploadExpiration.SixMonths,
-    name: 'image.png',
-    ...opts
+    name: "image.png",
+    ...opts,
   };
 
-  const type = getType(opts.name || '') || undefined;
+  const type = getType(opts.name || "") || undefined;
 
   const blob =
     opts.image instanceof Blob
       ? opts.image
       : new Blob([opts.image], {
-          type
+          type,
         });
 
   if (!(blob instanceof Blob)) {
-    throw new TypeError('opts.image is not a blob');
+    throw new TypeError("opts.image is not a blob");
   }
 
   const body = new FormData();
 
-  body.set('action', 'upload');
-  body.set('album_id', opts.album || '');
-  body.set('auth_token', IMGBB_KEY!);
-  body.set('expiration', opts.expiration || '');
-  body.set('source', blob, opts.name);
-  body.set('timestamp', Date.now().toString());
-  body.set('type', 'file');
+  body.set("action", "upload");
+  body.set("album_id", opts.album || "");
+  body.set("auth_token", IMGBB_KEY!);
+  body.set("expiration", opts.expiration || "");
+  body.set("source", blob, opts.name);
+  body.set("timestamp", Date.now().toString());
+  body.set("type", "file");
 
   const resp = await apiRequest({ body });
 
@@ -260,33 +256,33 @@ export async function removeImages(id: string[] | string) {
 
   const body = new FormData();
 
-  body.set('action', 'delete');
-  body.set('auth_token', IMGBB_KEY!);
+  body.set("action", "delete");
+  body.set("auth_token", IMGBB_KEY!);
 
-  if (typeof id == 'string') {
-    body.set('single', 'true');
-    body.set('delete', 'image');
-    body.set('deleting[id]', id);
+  if (typeof id == "string") {
+    body.set("single", "true");
+    body.set("delete", "image");
+    body.set("deleting[id]", id);
   } else {
-    body.set('from', 'list');
-    body.set('multiple', 'true');
-    body.set('delete', 'images');
+    body.set("from", "list");
+    body.set("multiple", "true");
+    body.set("delete", "images");
 
     for (const i of id) {
-      body.set('deleting[ids][]', i);
+      body.set("deleting[ids][]", i);
     }
   }
 
   const resp = await apiRequest({
     body,
-    endpointUseOrigin: true
+    endpointUseOrigin: true,
   });
 
   return await resp.json();
 }
 
 export function getImageIdByUrl(urlOrUser: string | User) {
-  const url = typeof urlOrUser == 'string' ? urlOrUser : urlOrUser.image;
+  const url = typeof urlOrUser == "string" ? urlOrUser : urlOrUser.image;
 
   if (!url) {
     return null;
