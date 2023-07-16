@@ -25,6 +25,9 @@ devDependencies:
   esbuild:
     specifier: ^0.18.13
     version: 0.18.13
+  prettier:
+    specifier: ^3.0.0
+    version: 3.0.0
   typescript:
     specifier: ^5.1.6
     version: 5.1.6
@@ -284,6 +287,12 @@ packages:
     engines: {node: '>=10.0.0'}
     hasBin: true
     dev: false
+
+  /prettier@3.0.0:
+    resolution: {integrity: sha512-zBf5eHpwHOGPC47h0zrPyNn+eAEIdEzfywMoYn2XPi0P44Zp0tSq64rq0xAREh4auw2cJZHo9QUob+NqCQky4g==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
 
   /svelte@3.59.2:
     resolution: {integrity: sha512-vzSyuGr3eEoAtT/A6bmajosJZIUWySzY2CzB3w2pgPvnkUjGqlDnsNnA0PMO+mMAhuyMul6C2uuZzY6ELSkzyA==}
