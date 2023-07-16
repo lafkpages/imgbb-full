@@ -15,7 +15,8 @@
   ],
   "type": "module",
   "scripts": {
-    "build": "node ./scripts/build.mjs && tsc"
+    "build": "node ./scripts/build.mjs && tsc",
+    "format": "prettier --write ."
   },
   "keywords": [
     "imgbb",
