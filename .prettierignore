@@ -1,0 +1,6 @@
+dist
+pnpm-lock.yaml
+.git
+.config
+.cache
+.upm
